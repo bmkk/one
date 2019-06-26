@@ -1,0 +1,62 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>滚动测试</title>
+	<style>
+		#info{
+			width:300px;
+			height:500px;
+			background-color: #bfa;
+			overflow-y:auto;
+        }
+        .txt{
+            width:200px;
+			height:1000px;
+        }
+	</style>
+</head>
+<body>
+	<h1>用户注册</h1>
+	<div id="info">
+        <div class="txt"></div>
+    </div>
+	<!--如果表单项添加	disabled="disabled"，则表单项将变为不可用状态-->
+	<input type="checkbox" disabled="disabled" name="1" id="btn01">我已仔细阅读该协议并遵守
+    <input type="submit" disabled="disabled" name="2"  value="注册" id="btn02">
+    <script>
+//   clientWidth clientHeight
+// 这两个属性分别获取元素的可见高度和宽度
+// 会获取元素的宽度和高度，包括内容区和内边距
+// offsetWidth offsetHeight
+// 获取元素的整个宽度和高度，包括内容区和内边距，边框
+// scrollLeft 可以获取水平滚动条的距离
+// scrollTop 可以获取垂直滚动条的距离
+// scrollWidth scrollHeight
+// 可以获取元素整个滚动区域的宽度和高度
+// 等式成立时表示垂直滚动条到达最底部
+		window.onload=function(){
+			/*当垂直滚动条到底时使表单项可用onscroll该事件会在元素的滚动的时候触发*/
+			//获取id为info的p元素
+			var info=document.getElementById("info");
+			var btn01=document.getElementById("btn01");
+			var btn02=document.getElementById("btn02");
+			//为info绑定一个滚动条滚动事件
+			info.onscroll=function(){
+                //检查垂直滚动条是否到底部
+				if(info.scrollTop==info.clientHeight){
+                    btn01.disabled=false;
+					btn02.disabled=false;	
+				}
+			}
+			//实现必须要勾选第一个按钮，才能按下提交按钮
+			btn02.onclick=function(){
+			if(btn01.checked==true)
+             	alert("恭喜您注册成功！");
+				else
+				alert("请勾选前面的协议条款，谢谢！");	
+			}
+		}	 	
+	</script>
+</body>
+</html>
