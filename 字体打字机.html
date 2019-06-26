@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+	<style>
+	</style>
+</head>
+<body>
+<p id="p1">你是猪吗？是啊！哈哈
+</p>
+</body>
+<script>
+   p1.onclick=function(){
+    var p1 = document.getElementById("p1");
+    var p2 = p1.innerText.split('');
+    p1.innerText='';
+    var i=0;
+    var qqq = setInterval(function () {
+        if (i<p2.length){
+            p1.innerText +=p2[i];
+            i++;
+        }else {
+            clearInterval(qqq);
+        }
+    },100);}
+</script>
+</html>
