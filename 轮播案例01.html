@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+  <html lang="en">
+   <head>
+       <meta charset="UTF-8">
+     <title>Title</title>
+       <style>
+           html body {
+               margin: 0;
+               padding: 0;
+          }
+          li{
+              list-style: none;
+          }
+          .div1{
+              width: 500px;
+              height: 400px;
+              margin: 50px auto;
+              position: relative;
+              border: 1px solid black;
+  
+          }
+         .div1 a img {
+              width: 400px;
+              position: absolute;
+              margin: 118px 50px;
+          }
+          .div1 ul{
+              position: absolute;
+              bottom: 110px;
+              right:53px;
+              z-index: 10;
+         }
+          .div1 ul li {
+              width: 15px;
+              height: 15px;
+              line-height: 15px;
+              border-radius: 50%;
+              float: left;
+              background-color: white;
+              margin-right: 5px;
+              cursor: pointer;
+              text-align: center;
+          }
+      </style>
+  </head>
+  <body>
+  <div class="div1" id="div1">
+      <a href="javascript:void(0)"><img src="img/1.png"></a>
+      <a href="javascript:void(0)"><img src="img/2.png"></a>
+      <a href="javascript:void(0)"><img src="img/3.png"></a>
+      <a href="javascript:void(0)"><img src="img/44.jpg"></a>
+      <a href="javascript:void(0)"><img src="img/55.jpg"></a>
+      <ul>
+          <li>1</li>
+          <li>2</li>
+          <li>3</li>
+          <li>4</li>
+          <li>5</li>
+      </ul>
+  </div>
+  <script>
+      var div1 = document.getElementById("div1");//整个区域
+      var a1 = div1.getElementsByTagName("a");//a标签 图片
+      var li1 = div1.getElementsByTagName("li");//右下角按钮
+     var ab = 0; //ab的值控制触摸按钮后的下一张图
+      //遍历所有图和按钮,页面加载完毕显示第一张图和第一个按钮
+      window.onload = function () {
+          for (var i=0;i<a1.length;i++){
+              if (i!=0){
+              a1[i].style.opacity = 0;
+              }else {
+                  li1[i].style.backgroundColor = "green";
+              }
+          }
+      };
+      //运行函数bb();
+      function bb() {
+       for (var j=0;j<li1.length;j++) {
+           //遍历所有的按钮,所有按钮都给绑定一个鼠标移上去的onmouseover事件
+           li1[j].onmouseover = function () {
+               //变量index就是当前触摸的按钮的文本-1,此前特意设置按钮文本为数字
+              var index = this.innerHTML - 1;
+               ab = index; //ab后面用return返回
+               //声明变量b
+              for (var b = 0; b < li1.length; b++) {
+                   //当b就是被触摸到的按钮的索引号时,设置第b张图片不透明度为100,渐变透明度效果1s,第b个按钮背景色变成green
+                   if (b == index) {
+                       a1[b].style.opacity = 100;
+                      a1[b].style.transition = "opacity 1s";
+                      li1[b].style.backgroundColor = "green";
+                   } else { //当b不是被触摸到的按钮的索引号时,就变透明,按钮颜色白色.
+                       a1[b].style.opacity = 0;
+                       li1[b].style.backgroundColor = "white";
+                   }
+               }
+               return ab; //返回ab,貌似运用到了闭包?不太了解.
+          }
+  
+       }
+       setInterval(function ac() { //设置2000毫秒重复运行
+                 ab = ab>li1.length-2?0:++ab; //5张图,当触摸到的按钮索引号大于3时(比如4),那么ab=0(下一张图为第0张),否则++ab;
+          //循环遍历下一张图的效果.
+                 for (var b = 0; b < li1.length; b++) {
+                     if (b == ab) {
+                         a1[b].style.opacity = 100;
+                         a1[b].style.transition = "opacity 1s";
+                         li1[b].style.backgroundColor = "green";
+                     } else {
+                        a1[b].style.opacity = 0;
+                        li1[b].style.backgroundColor = "white";                     }
+                 }
+             },2000);
+     }
+     bb(); //运行bb()
+ </script>
+ </body>
+ </html>
