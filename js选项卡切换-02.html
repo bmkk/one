@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>tab切换</title>
+    <style type="text/css">
+        button {
+            width: 120px;
+            height: 32px;
+            line-height: 32px;
+            background-color: #ccc;
+            font-size: 24px;
+        }
+        div {
+            display: none;
+            width: 200px;
+            height: 200px;
+            font-size: 72px;
+            color: #ddd;
+            background-color: green;
+            border: 1px solid black;
+        }
+    </style>
+</head>
+<body>
+    <button style="background-color: yellow;">1</button>
+    <button>2</button>
+    <button>3</button>
+    <button>4</button>
+    <div style="display:block;">1</div>
+    <div>2</div>
+    <div>3</div>
+    <div>4</div>
+    <script type="text/javascript">
+        var buttonArr = document.getElementsByTagName("button");
+        var divArr = document.getElementsByTagName("div");
+        for (var i = 0; i < buttonArr.length; i++) {
+            buttonArr[i].index = i;//添加一个自定义的index属性
+            // buttonArr[i].setAttribute("index",i);
+            buttonArr[i].onclick = function (e) {
+                for (var j = 0; j < buttonArr.length; j++) {
+                    buttonArr[j].style.backgroundColor = "#ccc";//给全部的button设置公共样式
+                    buttonArr[this.index].style.backgroundColor = "yellow";//给单击的button设置独立的效果样式
+                    divArr[j].style.display = "none";//给全部的div设置公共样式
+                    divArr[this.index].style.display = "block";//给显示的div设置独立的效果样式
+                }
+            }
+        }
+    </script>
+</body>
+</html>
