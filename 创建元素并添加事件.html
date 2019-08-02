@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="Generator" content="EditPlus®">
+  <meta name="Author" content="">
+  <meta name="Keywords" content="">
+  <meta name="Description" content="">
+  <title>createChild</title>
+  <style>
+     #cantianer{
+	  border:1px solid #000;
+	  overflow:auto;
+	 }
+	 #cantianer div{
+	   background-color:#e30b20;
+	   float:left;
+	   margin:2px;
+	 }
+  </style>
+ </head>
+ <body>
+ <button id="btn">添加</button>
+  <div id="cantianer"></div>
+  <script>
+   var btn=document.getElementById("btn");
+    var box=document.getElementById("cantianer");
+	var n=0;
+	function creat(){
+	 var div=document.createElement("div");
+		div.style.width="30px";
+		div.style.height="30px";
+		div.style.textAlign="center";
+		div.innerHTML=n++;
+		div.onclick=function(){
+		 console.log(this.parentElement.children.length);
+		}
+		return div;
+	}
+	btn.onclick=function(){   
+		box.appendChild(creat());
+	};
+  </script>	
+ </body>
+</html>
