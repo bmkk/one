@@ -1,0 +1,4 @@
+function getLocalTime(time) {
+        time = time / 1000;
+        return new Date(parseInt(time) * 1000).toLocaleString().replace(/:\d{1,2}$/, ' ');
+    }
